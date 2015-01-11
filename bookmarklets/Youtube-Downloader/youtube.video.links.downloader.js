@@ -305,7 +305,7 @@
             external : function( external ){
                 
                 // Non siamo su youtube oppure non abbiamo il servizio
-                if( D.location.href.indexOf( "www.youtube.com" ) < 0 || !external )return void( 0 );
+                if( D.location.href.indexOf( ".youtube.com" ) < 0 || !external )return void( 0 );
                                 
                 // Prelevo il codice
                 var tmp = D.location.href.split( "watch?" );
