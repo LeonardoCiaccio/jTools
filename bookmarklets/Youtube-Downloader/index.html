@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <!-- Site Properities -->
+        <title>Youtube Downloader</title>
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.6.2/semantic.min.css">
+        
+        <style>
+        
+            .ui.header.top{
+                
+                margin-top: 40px;
+                
+            }
+            
+            .tcenter{
+                
+                text-align: center;
+                
+            }
+            
+            .ui.divider.frog{
+                
+                margin-bottom: 80px;
+                
+            }
+            
+            .ui.divider.sfrog{
+                
+                margin-top: 80px;
+                
+            }
+        
+        </style>
+        
+    </head>
+    <body id="gam-options">
+        
+        <!-- Main/ -->
+        <div class="ui page grid">
+            
+            <div class="two wide column"></div>
+            
+            <div class="twelve wide column">
+                
+                <!-- Content/ -->
+                
+                <h2 class="ui header top">
+                  <i class="youtube icon red"></i>
+                  <div class="content">
+                    Youtube Downloader
+                    <div class="sub header">Descrizione di come installare i bookmarklets</div>
+                  </div>
+                </h2>
+                    
+                <div class="ui divider frog"></div>
+                
+                <div class="ui stackable grid">
+                    
+                    <div class="eight wide column">
+                        <h3 class="ui header tcenter">PopUp</h3>
+                        <div class="ui segment">
+                            <p>
+                                Come per ogni bookmarklets che si rispetti, trascina il pulsante qui sotto '<b>YT BUTTON</b>'  sulla
+                                barra dei preferiti.
+                            </p>
+                            <p>
+                                Questa versione apre una popup con i link dei video da scaricare, per il download 
+                                cliccare con il tasto destro su uno dei link a scelta e selezionare '<b>Salva link con nome</b>'              
+                            </p>
+                        </div>
+                        
+                        <div class="tcenter">
+                            <a href="javascript:!function(e,t){function r(e){if(e=parseInt(e),1>e)return&quot;0 byte&quot;;var t=1024,r=1024*t,n=1024*r;return t>e?e+&quot; byte&quot;:r>e?Math.round(e/t*100)/100+&quot; KB&quot;:n>e?Math.round(e/r*100)/100+&quot; MB&quot;:Math.round(e/n*100)/100+&quot; GB&quot;}function n(e){return e?e.toUpperCase().indexOf(&quot;MP4&quot;)>-1?&quot;MP4&quot;:e.toUpperCase().indexOf(&quot;WEBM&quot;)>-1?&quot;WEBM&quot;:e.toUpperCase().indexOf(&quot;3GP&quot;)>-1?&quot;3GP&quot;:&quot;FLV&quot;:&quot;unkown&quot;}function a(e,t,r){try{if(t.addEventListener)t.addEventListener(e,r,!1);else if(t.attachEvent){t.attachEvent(&quot;on&quot;+e,r)}return!0}catch(a){return!1}}function i(e){return e.trim().replace(/[^a-z 0-9]+/gi,&quot;&quot;)}return e&&t?void(window.YT={links:function(){var e,r=[];try{e=t.config.args.adaptive_fmts}catch(n){return r}try{for(var a=e.split(&quot;,&quot;),i=0;i<a.length;i++){for(var o=a[i].split(&quot;&&quot;),l={},p=0;p<o.length;p++){var c=o[p].split(&quot;=&quot;),d=decodeURIComponent(c[0].toUpperCase()),u=decodeURIComponent(c[1]);switch(d){case&quot;SIZE&quot;:l.size=u;break;case&quot;CLEN&quot;:l.clen=u;break;case&quot;URL&quot;:l.url=u;break;case&quot;TYPE&quot;:l.type=u}}l.size&&l.clen&&l.url&&l.type&&r.push(l)}}catch(n){}return r},compat:function(t,a){t=t||&quot;<a href='%U' data-lenght='%C' title='%F'>%T</a>&quot;,a=a||!1;for(var o=YT.links(),l=[],p=new RegExp(&quot;%S&quot;,&quot;gi&quot;),c=new RegExp(&quot;%C&quot;,&quot;gi&quot;),d=new RegExp(&quot;%U&quot;,&quot;gi&quot;),u=new RegExp(&quot;%F&quot;,&quot;gi&quot;),s=new RegExp(&quot;%T&quot;,&quot;gi&quot;),f=0;f<o.length;f++){var h=a===!0?r(o[f].clen):o[f].clen,v=a===!0?n(o[f].type):o[f].type,g=i(e.title)+&quot;.&quot;+n(o[f].type).toLowerCase(),x=t.replace(p,o[f].size).replace(c,h).replace(d,o[f].url).replace(u,g).replace(s,v);l.push(x)}return l},download:{button:function(){var t=&quot;YT-Links-Downloader&quot;;if(e.querySelector(&quot;#&quot;+t))return!1;var r=e.createElement(&quot;div&quot;),n=[&quot;width:100%&quot;,&quot;height:100%&quot;,&quot;top:0px&quot;,&quot;left:0px&quot;,&quot;background-color:rgba(255, 255, 255, 0.76)&quot;,&quot;overflow:hidden&quot;,&quot;z-index:9999999999&quot;,&quot;position:fixed&quot;].join(&quot;;&quot;),i=e.createElement(&quot;div&quot;),o=[&quot;width:210px&quot;,&quot;height:auto&quot;,&quot;max-height:160px&quot;,&quot;top:50%&quot;,&quot;left:50%&quot;,&quot;margin-top:-80px&quot;,&quot;margin-left:-105px&quot;,&quot;background-color:white&quot;,&quot;box-shadow: 1px 1px 14px 1px #333333&quot;,&quot;padding:2em&quot;,&quot;overflow:auto&quot;,&quot;z-index:99999999999&quot;,&quot;position:fixed&quot;,&quot;text-align:left&quot;].join(&quot;;&quot;),l=YT.compat(&quot;<p style='margin-bottom: 3px;'><a onclick=\&quot;alert( 'Right click then save as ...' );return false;\&quot; href='%U' title='%F' download='%F'>%S [%C] [%T]</a></p>&quot;,!0);return r.setAttribute(&quot;style&quot;,n),r.setAttribute(&quot;id&quot;,t),e.body.appendChild(r),l=l.length>0?l.join(&quot;&quot;):&quot;<p>No Links :(</p>&quot;,i.setAttribute(&quot;style&quot;,o),i.innerHTML=l,e.body.appendChild(i),void a(&quot;click&quot;,r,function(){i.parentNode.removeChild(i),this.parentNode.removeChild(this)})},external:function(t){if(e.location.href.indexOf(&quot;.youtube.com&quot;)<0||!t)return void 0;var r=e.location.href.split(&quot;watch?&quot;);if(2!=r.length)return!1;for(var n=r[1].split(&quot;&&quot;),a=0;a<n.length;a++)if(n[a].indexOf(&quot;v=&quot;)>-1){var i=n[a].replace(&quot;v=&quot;,&quot;&quot;).trim(),o=t.replace(/(%E)/gi,i);window.open(o);break}return void 0}}}):!1}(document,window.ytplayer);YT.download.button();" title="Trascinami nei preferiti" class="ui blue button bookmarklet">YT BUTTON</a>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="eight wide column">
+                        <h3 class="ui header tcenter">External</h3>
+                        <div class="ui segment">
+                          <p>
+                                Come per ogni bookmarklets che si rispetti, trascina il pulsante qui sotto '<b>YT EXTERNAL</b>' sulla
+                                barra dei preferiti.
+                            </p>
+                            <p>
+                                Questa versione apre una nuova tab passando il codice del video ad un servizio esterno, in questo 
+                                caso è totalmente free e modificabile '<b>www.10youtube.org</b>'
+                            </p>
+                        </div>
+                        
+                        <div class="tcenter">
+                            <a href="javascript:!function(e,t){function r(e){if(e=parseInt(e),1>e)return&quot;0 byte&quot;;var t=1024,r=1024*t,n=1024*r;return t>e?e+&quot; byte&quot;:r>e?Math.round(e/t*100)/100+&quot; KB&quot;:n>e?Math.round(e/r*100)/100+&quot; MB&quot;:Math.round(e/n*100)/100+&quot; GB&quot;}function n(e){return e?e.toUpperCase().indexOf(&quot;MP4&quot;)>-1?&quot;MP4&quot;:e.toUpperCase().indexOf(&quot;WEBM&quot;)>-1?&quot;WEBM&quot;:e.toUpperCase().indexOf(&quot;3GP&quot;)>-1?&quot;3GP&quot;:&quot;FLV&quot;:&quot;unkown&quot;}function a(e,t,r){try{if(t.addEventListener)t.addEventListener(e,r,!1);else if(t.attachEvent){t.attachEvent(&quot;on&quot;+e,r)}return!0}catch(a){return!1}}function i(e){return e.trim().replace(/[^a-z 0-9]+/gi,&quot;&quot;)}return e&&t?void(window.YT={links:function(){var e,r=[];try{e=t.config.args.adaptive_fmts}catch(n){return r}try{for(var a=e.split(&quot;,&quot;),i=0;i<a.length;i++){for(var o=a[i].split(&quot;&&quot;),l={},p=0;p<o.length;p++){var c=o[p].split(&quot;=&quot;),d=decodeURIComponent(c[0].toUpperCase()),u=decodeURIComponent(c[1]);switch(d){case&quot;SIZE&quot;:l.size=u;break;case&quot;CLEN&quot;:l.clen=u;break;case&quot;URL&quot;:l.url=u;break;case&quot;TYPE&quot;:l.type=u}}l.size&&l.clen&&l.url&&l.type&&r.push(l)}}catch(n){}return r},compat:function(t,a){t=t||&quot;<a href='%U' data-lenght='%C' title='%F'>%T</a>&quot;,a=a||!1;for(var o=YT.links(),l=[],p=new RegExp(&quot;%S&quot;,&quot;gi&quot;),c=new RegExp(&quot;%C&quot;,&quot;gi&quot;),d=new RegExp(&quot;%U&quot;,&quot;gi&quot;),u=new RegExp(&quot;%F&quot;,&quot;gi&quot;),s=new RegExp(&quot;%T&quot;,&quot;gi&quot;),f=0;f<o.length;f++){var h=a===!0?r(o[f].clen):o[f].clen,v=a===!0?n(o[f].type):o[f].type,g=i(e.title)+&quot;.&quot;+n(o[f].type).toLowerCase(),x=t.replace(p,o[f].size).replace(c,h).replace(d,o[f].url).replace(u,g).replace(s,v);l.push(x)}return l},download:{button:function(){var t=&quot;YT-Links-Downloader&quot;;if(e.querySelector(&quot;#&quot;+t))return!1;var r=e.createElement(&quot;div&quot;),n=[&quot;width:100%&quot;,&quot;height:100%&quot;,&quot;top:0px&quot;,&quot;left:0px&quot;,&quot;background-color:rgba(255, 255, 255, 0.76)&quot;,&quot;overflow:hidden&quot;,&quot;z-index:9999999999&quot;,&quot;position:fixed&quot;].join(&quot;;&quot;),i=e.createElement(&quot;div&quot;),o=[&quot;width:210px&quot;,&quot;height:auto&quot;,&quot;max-height:160px&quot;,&quot;top:50%&quot;,&quot;left:50%&quot;,&quot;margin-top:-80px&quot;,&quot;margin-left:-105px&quot;,&quot;background-color:white&quot;,&quot;box-shadow: 1px 1px 14px 1px #333333&quot;,&quot;padding:2em&quot;,&quot;overflow:auto&quot;,&quot;z-index:99999999999&quot;,&quot;position:fixed&quot;,&quot;text-align:left&quot;].join(&quot;;&quot;),l=YT.compat(&quot;<p style='margin-bottom: 3px;'><a onclick=\&quot;alert( 'Right click then save as ...' );return false;\&quot; href='%U' title='%F' download='%F'>%S [%C] [%T]</a></p>&quot;,!0);return r.setAttribute(&quot;style&quot;,n),r.setAttribute(&quot;id&quot;,t),e.body.appendChild(r),l=l.length>0?l.join(&quot;&quot;):&quot;<p>No Links :(</p>&quot;,i.setAttribute(&quot;style&quot;,o),i.innerHTML=l,e.body.appendChild(i),void a(&quot;click&quot;,r,function(){i.parentNode.removeChild(i),this.parentNode.removeChild(this)})},external:function(t){if(e.location.href.indexOf(&quot;.youtube.com&quot;)<0||!t)return void 0;var r=e.location.href.split(&quot;watch?&quot;);if(2!=r.length)return!1;for(var n=r[1].split(&quot;&&quot;),a=0;a<n.length;a++)if(n[a].indexOf(&quot;v=&quot;)>-1){var i=n[a].replace(&quot;v=&quot;,&quot;&quot;).trim(),o=t.replace(/(%E)/gi,i);window.open(o);break}return void 0}}}):!1}(document,window.ytplayer);YT.download.external(&quot;http://www.10youtube.org/watch?v=%E&quot;);" title="Trascinami nei preferiti" class="ui blue button bookmarklet">YT EXTERNAL</a>
+                        </div>
+                        
+                    </div>
+                                    
+                </div>
+                <div class="ui divider sfrog"></div>
+                
+                
+                <!-- /Content -->
+              
+            </div>
+            
+            <div class="two wide column"></div>
+            
+        </div>
+        <!-- /Main -->
+        
+        <!-- Scripts -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.6.2/semantic.min.js"></script>
+        
+        <script>
+        
+            $( document ).ready( function(){
+                
+                $( ".bookmarklet" ).click( function(){
+                    
+                    alert( "Trascinami sulla barra dei preferiti" );
+                    return false;
+                    
+                } );
+                
+            } );
+        
+        </script>
+        
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
