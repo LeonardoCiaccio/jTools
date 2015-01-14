@@ -20,7 +20,9 @@
         
     */
     
-    if( !D || !Y )return false;
+    if( !D )return false;
+    
+    var uReq = /^http(?:s?):\/\/www\.youtube\.com\/watch\?v\=/gi;
     
     function _getLend( size ){
         
@@ -90,10 +92,12 @@
         */
         
         links   : function(){
-                    
+                        
             // Riferimenti per il player
             var YD,
                 YO = [];
+            
+            if( !Y )return YO;
                                 
             //Abbiamo quello che ci occorre ?
             try{
@@ -224,6 +228,14 @@
             
             button : function(){
                 
+                if( !uReq.test( D.location.href ) ){
+                    
+                    alert( "Use this bookmarklet on :\r\n https://www.youtube.com/watch?v=($video $code)" );
+                    
+                    return void( 0 );
+                    
+                }
+                
                 var mID = "YT-Links-Downloader";
                 
                 // Se già siamo operativi esco
@@ -303,9 +315,17 @@
             */
             
             external : function( external ){
+            
+                if( !uReq.test( D.location.href ) ){
+                    
+                    alert( "Use this bookmarklet on :\r\n https://www.youtube.com/watch?v=($video $code)" );
+                    
+                    return void( 0 );
+                    
+                }
                 
                 // Non siamo su youtube oppure non abbiamo il servizio
-                if( D.location.href.indexOf( ".youtube.com" ) < 0 || !external )return void( 0 );
+                if( !external )return void( 0 );
                                 
                 // Prelevo il codice
                 var tmp = D.location.href.split( "watch?" );

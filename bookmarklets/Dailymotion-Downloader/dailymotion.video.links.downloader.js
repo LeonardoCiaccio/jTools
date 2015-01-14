@@ -21,8 +21,8 @@
     
     if( !D )return false;
     
-    var uReq = new RegExp( "^http(?:s?):\/\/www\.dailymotion\.com\/embed\/video\/", "gi" ),
-        sReq = new RegExp( "^http(?:s?):\/\/www\.dailymotion\.com\/video\/", "gi" );
+    var uReq = /^http(?:s?):\/\/www\.dailymotion\.com\/embed\/video\//gi,
+        sReq = /^http(?:s?):\/\/www\.dailymotion\.com\/video\//gi;
         
     function _addEvent( evnt, elem, func ){
         
@@ -66,16 +66,7 @@
 
             var links = [];
 
-            /*
-            
-                Non capisco perchè questa condizione non lavora
-                
-                ( uReq.test( D.location.href ) === true )
-                
-                Sono stato costretto a bypassarlo
-                
-            */
-            if( true ){ //uReq.test( D.location.href ) === true ){
+            if( D.location.href.match( uReq ) ){
 
                 try{
 
@@ -186,7 +177,7 @@
             button : function(){
                 
                 // Se siamo nella sezione giusta procediamo
-                if( uReq.test( D.location.href ) === true ){
+                if( D.location.href.match( uReq ) ){
                     
                     var mID = "DM-Links-Downloader";
                 
@@ -258,7 +249,7 @@
 
                     } );                    
                                         
-                }else if( !sReq.test( D.location.href ) ){
+                }else if( !D.location.href.match( sReq ) ){
                     
                     alert( "Use this bookmarklet on :\r\n http://www.dailymotion.com/video/($video $code)"
                          + "\r\n http://www.dailymotion.com/embed/video/($video $code)" );
