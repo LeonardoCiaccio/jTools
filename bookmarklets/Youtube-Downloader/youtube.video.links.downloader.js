@@ -22,7 +22,8 @@
     
     if( !D )return false;
     
-    var uReq = /^http(?:s?):\/\/www\.youtube\.com\/watch\?v\=/gi;
+    var uReq = /^http(?:s?):\/\/www\.youtube\.com\/watch\?v\=/gi,
+        lol  = " by Grab Any Media !";
     
     function _getLend( size ){
         
@@ -78,6 +79,12 @@
         
         return name.trim().replace( /[^a-z 0-9]+/gi, "" );//.replace( / /gi, "-" );	
     
+    };
+    
+    function _getTitle(){     
+        
+        return ( D.title ) ? _sanitizeName( D.title.trim() + lol ) : "Youtube Video" + lol;
+        
     };
     
     window.YT = {
@@ -141,7 +148,7 @@
                                 break;
 
                             case "URL":
-
+                                
                                 tmp.url = value;
                                 break;
 
@@ -196,7 +203,7 @@
                 
                 var cClen = ( trans === true ) ? _getLend( links[ i ].clen ) : links[ i ].clen,
                     tType = ( trans === true ) ? _getTyped( links[ i ].type ) : links[ i ].type,
-                    fName = _sanitizeName( D.title ) + "." + _getTyped( links[ i ].type ).toLowerCase();
+                    fName = _getTitle() + "." + _getTyped( links[ i ].type ).toLowerCase();
                 
                 var tmp = format.replace( reS, links[ i ].size )
                                 .replace( reC, cClen )
@@ -358,3 +365,7 @@
     
     
 } )( document, window.ytplayer );
+
+
+
+
