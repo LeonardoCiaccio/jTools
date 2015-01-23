@@ -15,3 +15,8 @@ troverete i sorgenti e le spiegazioni, quindi :
 4. Aprite/avviate il file 'index.html' per le spiegazioni o installazione del bookmarklet
 
 Enjoy
+
+TUTORIALS
+======
+
+(Youtube e Dailymotion)[http://www.youtube.com/watch?v=04_kzJMnxjg]
