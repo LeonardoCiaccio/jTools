@@ -19,4 +19,4 @@ Enjoy
 TUTORIALS
 ======
 
-(Youtube e Dailymotion)[http://www.youtube.com/watch?v=04_kzJMnxjg]
+Youtube e Dailymotion : http://www.youtube.com/watch?v=04_kzJMnxjg
