@@ -19,5 +19,5 @@ Enjoy
 TUTORIALS
 ======
 
-Youtube e Dailymotion : http://www.youtube.com/watch?v=04_kzJMnxjg
-Share                 : http://www.youtube.com/watch?v=lUbdu_1nTVY 
+1. Youtube e Dailymotion : http://www.youtube.com/watch?v=04_kzJMnxjg
+2. Share                 : http://www.youtube.com/watch?v=lUbdu_1nTVY 
