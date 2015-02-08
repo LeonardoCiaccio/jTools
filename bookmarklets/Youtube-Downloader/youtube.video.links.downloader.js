@@ -23,7 +23,7 @@
     if( !D )return false;
     
     var uReq = /^http(?:s?):\/\/www\.youtube\.com\/watch\?v\=/gi,
-        lol  = " by Grab Any Media !";
+        lol  = " by Grab Any Media";
     
     function _getLend( size ){
         
@@ -44,9 +44,10 @@
     function _getTyped( type ){
         
         return ( !type ) ? "unkown" :
-               ( type.toUpperCase().indexOf( "MP4" ) > -1 ) ? "MP4" :
-               ( type.toUpperCase().indexOf( "WEBM" ) > -1 ) ? "WEBM" :
-               ( type.toUpperCase().indexOf( "3GP" ) > -1 ) ? "3GP" :
+               ( type.toUpperCase().indexOf( "VIDEO/MP4" ) > -1 ) ? "MP4" :
+               ( type.toUpperCase().indexOf( "VIDEO/WEBM" ) > -1 ) ? "WEBM" :
+               ( type.toUpperCase().indexOf( "VIDEO/3GPP" ) > -1 ) ? "3GP" :        
+               ( type.toUpperCase().indexOf( "VIDEO/X-FLV" ) > -1 ) ? "FLV" :
                "FLV";
         
     };
@@ -75,31 +76,33 @@
         
     };
     
-    function _sanitizeName( name ){			
+    function _sanitizeName( name, replacer ){			
         
-        return name.trim().replace( /[^a-z 0-9]+/gi, "" );//.replace( / /gi, "-" );	
+        replacer = replacer || "+";
+        
+        return name.trim().replace( /[^a-z 0-9]+/gi, "" ).replace( / /gi, replacer );	
     
     };
     
-    function _getTitle(){     
+    function _getTitle( replacer ){     
         
-        return ( D.title ) ? _sanitizeName( D.title.trim() + lol ) : "Youtube Video" + lol;
+        return ( D.title ) ? _sanitizeName( D.title.trim() + lol, replacer ) : _sanitizeName( "Youtube Video" + lol, replacer );
         
     };
     
     window.YT = {
         
         /*
+        
+           Preleva i link e li dispone in un array di oggetti
+           con i rispettivi valori, oppure un array vuoto :
             
-            Preleva i link e li dispone in un array di oggetti
-            con i rispettivi valori, oppure un array vuoto :
-            
-            .size ; .clen ; .url ; .type
-            
+           .quality ; .type ; .url 
+        
         */
         
-        links   : function(){
-                        
+        links      : function(){
+        
             // Riferimenti per il player
             var YD,
                 YO = [];
@@ -108,78 +111,71 @@
                                 
             //Abbiamo quello che ci occorre ?
             try{
-                    
-                YD = Y.config.args.adaptive_fmts;
                 
+                YD = Y.config.args.url_encoded_fmt_stream_map;
+            
             }catch( e ){
-                    
-                return YO;			
                 
+                return YO;
+            
             }
-                
-            // Abbiamo la configurazione, vediamo un po
+            
             try{
-                    
-                var a01 = YD.split(",");
-
-                //size=; clen=; url=; type=	
+                
+                var a01 = YD.split( "," );
+                
+                // quality= ; type= ; url=	
                 for( var a02 = 0; a02 < a01.length; a02++ ){
-
+                    
                     var a03 = a01[ a02 ].split( "&" ),
                         tmp = {};
-
+                    
                     for( var a04 = 0; a04 < a03.length; a04++ ){
-
+                        
                         var a05 = a03[ a04 ].split( "=" ),
-                            key = decodeURIComponent(a05[0].toUpperCase()),
-                            value = decodeURIComponent(a05[1]);
-
-                        // Selezioniamo le dimensioni e altre informazioni
-                        switch(key){
-
-                            case "SIZE":
-
-                                tmp.size = value;
+                            key = decodeURIComponent( a05[ 0 ].toUpperCase() ),
+                            value = decodeURIComponent( a05[ 1 ] );
+                        
+                        switch( key ){
+                                
+                            case "TYPE":
+                                
+                                tmp.type = value;
                                 break;
-
-                            case "CLEN":
-
-                                tmp.clen = value;
+                            
+                            case "QUALITY":
+                                
+                                tmp.quality = value;
                                 break;
-
+                            
                             case "URL":
                                 
                                 tmp.url = value;
                                 break;
-
-                            case "TYPE":
-
-                                tmp.type = value;
-                                break;
-
+                        
                         }
-
+                        
                     }
-
-                    if( tmp.size && tmp.clen && tmp.url && tmp.type )YO.push( tmp );
-
+                    
+                    if( tmp.type && tmp.quality && tmp.url )YO.push( tmp );
+                
                 }
-
+                
+                return YO;
+            
             }catch( e ){
-
-            // TODO     
+                
+                return YO;
                 
             }
-
-            return YO;
-                
+            
         },
         
         /*
         
             Restituisce del codice html derivante il formato richiesto :
             
-            esempio .compat( "<a href='%U' data-lenght='%C' title='%F'>%T</a>" )
+            esempio .compat( "<a href='%U' data-quality='%Q' title='%F'>[ %T ][ %Q ]</a>" )
             
             quindi restituisce un array convertendo i segnaposti con i valori richiesti
         
@@ -187,29 +183,28 @@
         
         compat   : function( format, trans ){
             
-            format = format || "<a href='%U' data-lenght='%C' title='%F'>%T</a>";
+            format = format || "<a href='%U' data-quality='%Q' title='%F'>[ %T ][ %Q ]</a>";
             trans  = trans  || false;
             
             var links   = YT.links(),
                 compats = [];
             
-            var reS = new RegExp( "\%S", "gi" ),
-                reC = new RegExp( "\%C", "gi" ),
+            var reQ = new RegExp( "\%Q", "gi" ),
                 reU = new RegExp( "\%U", "gi" ),
                 reF = new RegExp( "\%F", "gi" ),
                 reT = new RegExp( "\%T", "gi" );
             
             for( var i=0; i < links.length; i++ ){
                 
-                var cClen = ( trans === true ) ? _getLend( links[ i ].clen ) : links[ i ].clen,
-                    tType = ( trans === true ) ? _getTyped( links[ i ].type ) : links[ i ].type,
-                    fName = _getTitle() + "." + _getTyped( links[ i ].type ).toLowerCase();
+                var fName = _getTitle( " " ) + "." + _getTyped( links[ i ].type ).toLowerCase();
                 
-                var tmp = format.replace( reS, links[ i ].size )
-                                .replace( reC, cClen )
+                // Aggiungo il valore del title alla fine
+                links[ i ].url = links[ i ].url + "&title=" + _getTitle();
+                
+                var tmp = format.replace( reQ, links[ i ].quality )
                                 .replace( reU, links[ i ].url )
                                 .replace( reF, fName )
-                                .replace( reT, tType );
+                                .replace( reT, _getTyped( links[ i ].type ).toUpperCase() );
                 
                 compats.push( tmp );
                                 
@@ -271,13 +266,13 @@
                     // Lo stile della popup
                     pUpStyle = [
 
-                        "width:210px",
+                        "width:120px",
                         "height:auto",
                         "max-height:160px",
                         "top:50%",
                         "left:50%",
                         "margin-top:-80px",
-                        "margin-left:-105px",
+                        "margin-left:-60px",
                         "background-color:white",
                         "box-shadow: 1px 1px 14px 1px #333333",
                         "padding:2em",
@@ -289,7 +284,8 @@
                     ].join( ";" ),
                     
                     // I nostri links
-                    pUpLinks = YT.compat( "<p style='margin-bottom: 3px;'><a onclick=\"alert( 'Right click then save as ...' );return false;\" href='%U' title='%F' download='%F'>%S [%C] [%T]</a></p>", true );
+                    /*pUpLinks = YT.compat( "<p style='margin-bottom: 3px;'><a onclick=\"alert( 'Right click then save as ...' );return false;\" href='%U' title='%F' download='%F'>[%Q][%T]</a></p>", true );*/
+                    pUpLinks = YT.compat( "<p style='margin-bottom: 3px;'><a href='%U' title='%F' download='%F'>[%Q][%T]</a></p>", true );    
                 
                 pMain.setAttribute( "style", pMainStyle );
                 pMain.setAttribute( "id", mID );
